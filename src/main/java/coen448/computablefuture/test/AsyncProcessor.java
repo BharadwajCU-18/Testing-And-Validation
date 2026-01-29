@@ -12,6 +12,7 @@ public class AsyncProcessor {
         return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
             .thenApply(v -> futures.stream()
                 .map(CompletableFuture::join)
+                .limit(1)
                 .collect(Collectors.joining(" ")));
     }
 }
